@@ -11,7 +11,7 @@ sections:
   label: Posts
   create: documents
   new_doc_ext: md
-upload_dir: uploads
+upload_dir: assets/images/uploads
 public_path: assets/images/uploads
 front_matter_path: ''
 use_front_matter_path: false
