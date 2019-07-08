@@ -1,0 +1,67 @@
+<head>
+  <title>
+    {% if page.url == "/" %}
+      {{ site.title }}
+    {% elsif page.title %}
+      {{ page.title }} 	| {{ site.title }}
+      {% else %}
+      {{ page.tag | capitalize }} 	| {{ site.title }}
+    {% endif %}
+  </title>
+
+  <!-- General META tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="I'm Kris Bogdanov. A ruby on rails junior!">
+
+  <!-- Twitter META tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="{{ site.twitter_username }}">
+  <meta name="twitter:creator" content="{{ site.twitter_username }}">
+  {% if page.title %}
+    <meta name="twitter:title" content="{{ page.title }}">
+  {% else %}
+    <meta name="twitter:title" content="{{ site.title }}">
+  {% endif %}
+
+  {% if page.url %}
+    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+  {% endif %}
+
+  {% if page.subtitle %}
+    <meta name="twitter:description" content="{{ page.subtitle }}">
+  {% endif %}
+
+
+  <!-- Facebook META tags -->
+  {% if page.url %}
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:type"               content="article" />
+  {% endif %}
+
+  {% if page.title %}
+    <meta property="og:title" content="{{ page.title }}" />
+  {% else %}
+    <meta property="og:title"  content="{{ site.title }}">
+  {% endif %}
+
+  {% if page.subtitle %}
+    <meta property="og:description" content="{{ page.subtitle }}" />
+  {% endif %}
+  
+
+  <!-- Favicon -->
+
+  <!-- Fonts -->
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  
+  <!-- Production stuff -->
+  {% if site.production %}
+    {% include analytics.html %}
+  {% endif %}
+  
+  <!-- CSS -->
+</head>
