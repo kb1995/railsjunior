@@ -1,7 +1,8 @@
 ---
 layout: blog
-slug: where-did-my-time-go
-title: Where did my time go?
-date: 2018-12-27T21:21:13.657Z
+slug: first-blog-post
+title: First blog post
+date: 2019-07-07 20:21:13 +0000
 category: test
+
 ---
