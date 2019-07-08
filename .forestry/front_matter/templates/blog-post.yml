@@ -17,3 +17,5 @@ fields:
 - type: text
   name: category
   label: category
+pages:
+- _posts/implement-a-passwordless-auth-with-sorcery.md
