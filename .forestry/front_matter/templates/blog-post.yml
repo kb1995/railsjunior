@@ -1,4 +1,21 @@
 ---
 label: Blog post
 hide_body: false
-fields: []
+fields:
+- type: text
+  name: layout
+  label: layout
+- type: text
+  name: slug
+  label: slug
+- type: text
+  name: title
+  label: title
+- type: datetime
+  name: date
+  label: date
+- type: text
+  name: category
+  label: category
+pages:
+- _posts/2019-07-07-implement-a-passwordless-auth-with-sorcery.md
