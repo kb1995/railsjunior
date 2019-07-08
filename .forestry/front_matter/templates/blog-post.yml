@@ -18,4 +18,4 @@ fields:
   name: category
   label: category
 pages:
-- _posts/implement-a-passwordless-auth-with-sorcery.md
+- _posts/2019-07-07-implement-a-passwordless-auth-with-sorcery.md
