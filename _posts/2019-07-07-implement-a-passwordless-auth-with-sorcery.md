@@ -30,7 +30,42 @@ This is the basic premise of using email to authenticate the user
 * we send an email with a magic link (one time, randomly generated code)
 * The user clicks the link and the service being used will identify the token and exchange it for a live token, logging the user in.
 
-## Goal of this article - create a passwordless auth for a User and send them an email containing a magic link
+## Goal: create a passwordless auth for a User and send them an email containing a magic link
+
+### Create a user model and controller
+
+    rails g controller users index edit update
+    rails g model User name:string email:string login_token:string login_token_valid_until:datetime
+    rake db:migrate
+
+### Create the skeleton for the login logic
+
+    rails g controller logins create
+    rails g controller sessions create destroy
+
+### Configure Sorcery
+
+Let's go to [Github](https://github.com/Sorcery/sorcery) and see what we need to configure Sorcery and link it to the User model
+
+In the Gemfile
+
+    gem 'sorcery'
+
+and the in the terminal
+
+    bundle
+
+### Create a form that submits an email
+
+Install simple form
+
+In the Gemfile
+
+    gem 'simple_form'
+
+and the in the terminal
+
+    bundle
 
 * Create a User model
 * Install Sorcery
