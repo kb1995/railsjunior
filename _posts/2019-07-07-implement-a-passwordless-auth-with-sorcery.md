@@ -41,8 +41,8 @@ rake db:migrate
 
 ### Create the skeleton for the login logic
 ```console
-    rails g controller logins create
-    rails g controller sessions create destroy
+rails g controller logins create
+rails g controller sessions create destroy
 ```
 
 ### Update routes file
@@ -70,12 +70,12 @@ Let's go to [Github](https://github.com/Sorcery/sorcery) and see what we need to
 
 In the Gemfile
 ```rb
-    gem 'sorcery'
+gem 'sorcery'
 ```
 
 and the in the terminal
 ```console
-    bundle
+bundle
 ```
 
 Hook Sorcery to the User model
@@ -114,12 +114,12 @@ Install simple form
 
 In the Gemfile
 ```rb
-    gem 'simple_form'
+gem 'simple_form'
 ```
 
 and the in the terminal
 ```console
-    bundle
+bundle
 ```
 
 In logins/new.html.erb
@@ -264,3 +264,5 @@ and finally views/users/edit.html.erb
 ```
 
 To make sure that the authentication works, go to incognito and copy paste the edit page. You can't access the page unless you are logged in with the correct account.
+
+Here is a link to my Github repo if you want to see the source code of this example (TODO)

@@ -2,6 +2,11 @@
   padding: 15px;
 }
 
+.highlight .go { color: #FFF } /* Terminal */
+.highlight { color: white; } /* Normal html text */
+
+// ----
+
 .highlight pre { background-color: #272822; }
 .highlight .hll { background-color: #272822; }
 .highlight .c { color: #75715e } /* Comment */
