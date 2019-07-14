@@ -8,6 +8,16 @@ category: rails
 ---
 ## What is passwordless authentication?
 
+Passwordless authentication is a verification process that determines whether someone is, in fact, who they say they are without requiring that person to enter their username and password. 
+
+Instead you use a security token to authenticate the user.
+
+Here are some benefits of passwordless auth:
+
+* improved UX - the user doesn't need to remember passwords and request new password if they forget their old one 
+* increased security - reduced chance of attacks, password re-use and leaks 
+* relatively simple to create - you don't need to create a lot of views
+
 ## What is Sorcery?
 
 Even though that I am a big fan of Devise, I started to like how simple and clean Sorcery is. It doesn't take much code to get Sorcery up and running, especially if you are implementing passwordless authentication.
