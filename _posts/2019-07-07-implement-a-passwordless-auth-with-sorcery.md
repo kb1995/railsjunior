@@ -100,6 +100,14 @@ class ApplicationController < ActionController::Base
 end
 ```
 
+Finally, include 
+
+```rb
+before_action :require_login, only: [:edit, :update]
+```
+
+in your UsersController to let know for which actions Sorcery should authenticate
+
 ### Create a form that submits an email
 
 Install simple form
@@ -112,6 +120,40 @@ In the Gemfile
 and the in the terminal
 ```console
     bundle
+```
+
+In users/edit.html.erb
+
+```erb
+<div>
+  <%= simple_form_for current_user do |f| %>
+    <%= f.input :name, label: "Name" %>
+    <%= f.submit "Update name" %>
+  <% end %>
+</div>
+```
+
+Your UsersController should look like
+
+```rb
+class UsersController < ApplicationController
+  before_action :require_login, only: [:edit, :update]
+  def index
+  end
+
+  def edit
+  end
+
+  def update
+    current_user.update! user_params
+    redirect_to root_path
+  end
+
+  private 
+  def user_params
+    params.require(:user).permit(:name)
+  end
+end
 ```
 
 * Create a User model
