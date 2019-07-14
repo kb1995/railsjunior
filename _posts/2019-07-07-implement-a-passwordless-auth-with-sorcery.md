@@ -45,6 +45,25 @@ rake db:migrate
     rails g controller sessions create destroy
 ```
 
+### Update routes file
+```rb
+Rails.application.routes.draw do
+  #
+  get 'sessions/create'
+  delete 'sessions/destroy'
+
+  #
+  get 'logins/new'
+  post 'logins/create'
+  
+  #
+  resources :users
+  
+  #
+  root 'users#index'
+end
+```
+
 ### Configure Sorcery
 
 Let's go to [Github](https://github.com/Sorcery/sorcery) and see what we need to configure Sorcery and link it to the User model
@@ -58,6 +77,29 @@ and the in the terminal
 ```console
     bundle
 ```
+
+Hook Sorcery to the User model
+
+```rb
+class User < ApplicationRecord
+  authenticates_with_sorcery!
+end
+```
+
+Update Application Controller to configure current_user and to let know what rails should do if the user is not authenticated
+
+```rb
+class ApplicationController < ActionController::Base
+  def user_class
+    User  
+  end
+
+  def not_authenticated
+    redirect_to root_path, alert: 'Not authenticated'
+  end
+end
+```
+
 ### Create a form that submits an email
 
 Install simple form
