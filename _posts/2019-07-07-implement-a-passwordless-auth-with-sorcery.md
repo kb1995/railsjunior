@@ -122,18 +122,103 @@ and the in the terminal
     bundle
 ```
 
-In users/edit.html.erb
+In logins/new.html.erb
 
 ```erb
-<div>
-  <%= simple_form_for current_user do |f| %>
-    <%= f.input :name, label: "Name" %>
-    <%= f.submit "Update name" %>
-  <% end %>
-</div>
+<%= simple_form_for @user, url: logins_create_path, method: :post do |f| %>
+  <%= f.input :email, label: "Email" %>
+  <%= f.submit "Get a magic link" %>
+<% end %>
 ```
 
-Your UsersController should look like
+Your LoginsController should look like
+
+```rb
+class LoginsController < ApplicationController
+  def new
+    @user = User.new
+  end
+
+  def create
+    user = User.find_or_create_by!(email: params[:user][:email])
+    user.update!(login_token: SecureRandom.urlsafe_base64,
+      login_token_valid_until: Time.now + 60.minutes)
+      
+    url = sessions_create_url(login_token: user.login_token)
+    LoginMailer.send_email(user, url).deliver_now
+
+    redirect_to root_path, notice: 'Login link sent to your email'
+  end
+end
+```
+
+### Create the LoginMailer
+
+create a file app/mailers/login_mailer and put this info in
+
+```rb
+class LoginMailer < ApplicationMailer
+  def send_email(user, url)
+    @user = user
+    @url  = url
+
+    mail to: @user.email, subject: 'Sign-in into someapp.com'
+  end
+end
+```
+
+Now we need to create the view of the letter. Create a new file app/views/login_mailer/send_email.html.erb
+
+```erb
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome <%= @user.email %>,</h1>
+    <a href="<%= @url %>">Magic link</a>
+</html>
+```
+
+### (Optional) Configure LetterOpener
+
+TODO
+
+### Sessions controller
+
+```rb
+class SessionsController < ApplicationController
+  def create
+    # If a login token has expired, we don't log in the user
+    user = User.where(login_token: params[:login_token])
+              .where('login_token_valid_until > ?', Time.now).first
+
+    if user
+      # nullify the login token so it can't be used again
+      user.update!(login_token: nil, login_token_valid_until: 1.year.ago)
+
+      # sorcery helper
+      auto_login(user)
+
+      redirect_to root_path, notice: 'Congrats. You are signed in!'
+    else
+      redirect_to root_path, alert: 'Invalid or expired login link'
+    end
+  end
+
+  def destroy
+    # sorcery helper
+    logout
+
+    redirect_to root_path, notice: 'You are signed out'
+  end
+end
+```
+
+### Final touches - UsersController and user views
+
+Your UsersController should look like this
 
 ```rb
 class UsersController < ApplicationController
@@ -156,17 +241,26 @@ class UsersController < ApplicationController
 end
 ```
 
-* Create a User model
-* Install Sorcery
-* Configure Sorcery for the User model
-* Disable Password for the User model
-* create fields for passwordless auth
-* create a sessions controller
-  * create
-  * destroy
-* create a view with an email where a user can submit their email
-* create a mailer
-* create a magic link
-* Send the mailer whenever you submit the form with the email
+update views/users/index.html.erb
 
+```erb
+<% if current_user %>
+  <h1><%= current_user.name.present? ? "My name is #{current_user.name}" : "Input your name using the link below" %></h1>
+  <%= link_to  "Edit current user", edit_user_path(current_user) %> <br>
+  <%= link_to  "Sign out", sessions_destroy_url, method: :delete %> <br>
+<% else %>
+  <h1>Login to input your name</h1>
+  <%= link_to  "Login to edit", logins_new_path %>
+<% end %>
 ```
+
+and finally views/users/edit.html.erb
+
+```erb
+<%= simple_form_for current_user do |f| %>
+  <%= f.input :name, label: "Name" %>
+  <%= f.submit "Update name" %>
+<% end %>
+```
+
+To make sure that the authentication works, go to incognito and copy paste the edit page. You can't access the page unless you are logged in with the correct account.
