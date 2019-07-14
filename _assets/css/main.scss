@@ -1,0 +1,27 @@
+---
+---
+
+@charset 'UTF-8';
+
+@import "./syntax.scss";
+
+// Links
+
+a{
+  text-decoration: none;
+  color: #000 !important;
+  &:hover{
+    color: #000 !important;
+  }
+
+  &.no-underline{
+    text-decoration: none;
+    // &:hover{
+    //   text-decoration: none;
+    // }
+  }
+
+  &.no-color-change{
+    color:inherit;
+  }
+}
