@@ -27,4 +27,4 @@ Even though that I am a big fan of Devise, I started to like how simple and clea
 * create a magic link
 * Send the mailer whenever you submit the form with the email
 
-    user.update!(login_token: SecureRandom.urlsafe_base64, login_token_valid_until: Time.now + 60.minutes)
+      user.update!(login_token: SecureRandom.urlsafe_base64, login_token_valid_until: Time.now + 60.minutes)erge
