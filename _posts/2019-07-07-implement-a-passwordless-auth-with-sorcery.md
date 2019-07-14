@@ -22,6 +22,14 @@ Here are some benefits of passwordless auth:
 
 Even though that I am a big fan of Devise, I started to like how simple and clean Sorcery is. It doesn't take much code to get Sorcery up and running, especially if you are implementing passwordless authentication.
 
+## Authentication through email
+
+This is the basic premise of using email to authenticate the user
+
+* a user inputs their email on an input link
+* we send an email with a magic link (one time, randomly generated code)
+* The user clicks the link and the service being used will identify the token and exchange it for a live token, logging the user in.
+
 ## Goal of this article - create a passwordless auth for a User and send them an email containing a magic link
 
 * Create a User model
