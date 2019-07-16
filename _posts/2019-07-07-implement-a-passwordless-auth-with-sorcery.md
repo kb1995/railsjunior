@@ -30,16 +30,19 @@ This is the basic premise of using email to authenticate the user
 * we send an email with a magic link (one time, randomly generated code)
 * The user clicks the link and the service being used will identify the token and exchange it for a live token, logging the user in.
 
-## Goal: create a passwordless auth for a User and send them an email containing a magic link
+## Enough theory, let's get to coding
+Our goal in this article is to create a passwordless authentication system for the User model and send the user an email containing a magic link. When a user click on the magic link, they are automatically signed in.
 
-### Create a user model and controller
+## Create a user controller and model
+Pay attention to the login_token and the login_token_valid_until - we will use those to store information about the passwordless auth.
 ```console
 rails g controller users index edit update
 rails g model User name:string email:string login_token:string login_token_valid_until:datetime
 rake db:migrate
 ```
 
-### Create the skeleton for the login logic
+## Create the skeleton for the authentication logic
+In these controllers, we will validate the token and login the user.
 ```console
 rails g controller logins create
 rails g controller sessions create destroy
@@ -64,21 +67,23 @@ Rails.application.routes.draw do
 end
 ```
 
-### Configure Sorcery
+## Configure Sorcery
 
-Let's go to [Github](https://github.com/Sorcery/sorcery) and see what we need to configure Sorcery and link it to the User model
+Let's go to [Github](https://github.com/Sorcery/sorcery) and see how to configure Sorcery, in order to link it to the User model.
 
-In the Gemfile
+We won't need to use all the steps in the example, because we don't want passwords.
+
+In the Gemfile, include
 ```rb
 gem 'sorcery'
 ```
 
-and the in the terminal
+and in the terminal execute the command
 ```console
 bundle
 ```
 
-Hook Sorcery to the User model
+Next, we hook Sorcery to the User model by simple writing
 
 ```rb
 class User < ApplicationRecord
@@ -86,7 +91,9 @@ class User < ApplicationRecord
 end
 ```
 
-Update Application Controller to configure current_user and to let know what rails should do if the user is not authenticated
+Update Application Controller to configure current_user.
+
+We also let rails know what should happen if the user is not authenticated successfully.
 
 ```rb
 class ApplicationController < ActionController::Base
@@ -100,29 +107,37 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-Finally, include 
+Finally, include require_login in the UsersController in order to let Sorcery know which actions require authentication.
 
 ```rb
-before_action :require_login, only: [:edit, :update]
+class UsersController < ApplicationController
+  before_action :require_login, only: [:edit, :update]
+  def index
+  end
+
+  def edit
+  end
+
+  def update
+  end
+end
 ```
 
-in your UsersController to let know for which actions Sorcery should authenticate
-
-### Create a form that submits an email
+## Create a form that sends an email
 
 Install simple form
 
-In the Gemfile
+In the Gemfile, add
 ```rb
 gem 'simple_form'
 ```
 
-and the in the terminal
+and then in the terminal
 ```console
 bundle
 ```
 
-In logins/new.html.erb
+In logins/new.html.erb, we define a simple form that submits an email address.
 
 ```erb
 <%= simple_form_for @user, url: logins_create_path, method: :post do |f| %>
@@ -131,7 +146,7 @@ In logins/new.html.erb
 <% end %>
 ```
 
-Your LoginsController should look like
+Next, let's update our LoginsController to look like this
 
 ```rb
 class LoginsController < ApplicationController
@@ -140,21 +155,28 @@ class LoginsController < ApplicationController
   end
 
   def create
+    # the user might already exist in our db or it might be a new user
     user = User.find_or_create_by!(email: params[:user][:email])
+
+    # create a login_token and set it up to expiry in 60 minutes
     user.update!(login_token: SecureRandom.urlsafe_base64,
       login_token_valid_until: Time.now + 60.minutes)
-      
+    
+    # create the url which is to be included in the email
     url = sessions_create_url(login_token: user.login_token)
-    LoginMailer.send_email(user, url).deliver_now
+
+    # send the email
+    LoginMailer.send_email(user, url).deliver_later
 
     redirect_to root_path, notice: 'Login link sent to your email'
   end
 end
 ```
 
-### Create the LoginMailer
+## Create the LoginMailer
 
-create a file app/mailers/login_mailer and put this info in
+We defined the LoginMailer, now we need to create it.
+Create a file in app/mailers/login_mailer that will look like this
 
 ```rb
 class LoginMailer < ApplicationMailer
@@ -162,12 +184,12 @@ class LoginMailer < ApplicationMailer
     @user = user
     @url  = url
 
-    mail to: @user.email, subject: 'Sign-in into someapp.com'
+    mail to: @user.email, subject: 'Sign in into mywebsite.com'
   end
 end
 ```
 
-Now we need to create the view of the letter. Create a new file app/views/login_mailer/send_email.html.erb
+We need to create the view of the letter. Create a new file app/views/login_mailer/send_email.html.erb
 
 ```erb
 <!DOCTYPE html>
@@ -181,24 +203,43 @@ Now we need to create the view of the letter. Create a new file app/views/login_
 </html>
 ```
 
-### (Optional) Configure LetterOpener
+## (Optional) Configure LetterOpener
 
-TODO
+LetterOpener is a great gem that allows us to view emails that have been sent in development.
 
-### Sessions controller
+Once again, add the gem in the Gemfile and bundle
+
+```rb
+gem "letter_opener", :group => :development
+```
+
+```console
+bundle
+```
+
+In development.rb, include these two lines
+
+```rb
+config.action_mailer.delivery_method = :letter_opener
+config.action_mailer.perform_deliveries = true
+```
+
+We should now be able to send and view the emails we send!
+
+## Sessions controller
 
 ```rb
 class SessionsController < ApplicationController
   def create
-    # If a login token has expired, we don't log in the user
+    # we don't log in the user if a login token has expired 
     user = User.where(login_token: params[:login_token])
-              .where('login_token_valid_until > ?', Time.now).first
+                .where('login_token_valid_until > ?', Time.now).first
 
     if user
       # nullify the login token so it can't be used again
       user.update!(login_token: nil, login_token_valid_until: 1.year.ago)
 
-      # sorcery helper
+      # sorcery helper which logins the user
       auto_login(user)
 
       redirect_to root_path, notice: 'Congrats. You are signed in!'
@@ -208,7 +249,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    # sorcery helper
+    # sorcery helper which logouts the user
     logout
 
     redirect_to root_path, notice: 'You are signed out'
@@ -216,9 +257,13 @@ class SessionsController < ApplicationController
 end
 ```
 
-### Final touches - UsersController and user views
+Congrats! You now have a passwordless authentication
 
-Your UsersController should look like this
+## Final touches - UsersController and user views
+
+Let's finish this article by actually something.
+
+Update your UsersController which allows us to update the user name.
 
 ```rb
 class UsersController < ApplicationController
@@ -241,7 +286,7 @@ class UsersController < ApplicationController
 end
 ```
 
-update views/users/index.html.erb
+Update views/users/index.html.erb
 
 ```erb
 <% if current_user %>
@@ -263,6 +308,6 @@ and finally views/users/edit.html.erb
 <% end %>
 ```
 
-To make sure that the authentication works, go to incognito and copy paste the edit page. You can't access the page unless you are logged in with the correct account.
+To make sure that the authentication works, go to incognito and enter the edit page URL. You shouldn't be able to access the page unless you are logged in with the correct account.
 
 Here is a link to my Github repo if you want to see the source code of this example (TODO)
