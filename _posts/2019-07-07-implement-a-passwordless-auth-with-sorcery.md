@@ -261,7 +261,7 @@ Congrats! You now have a passwordless authentication
 
 ## Final touches - UsersController and user views
 
-Let's finish this article by actually something.
+Let's finish this article by actually doing something with the passwordless auth.
 
 Update your UsersController which allows us to update the user name.
 
