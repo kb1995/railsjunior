@@ -7,7 +7,7 @@ layout: default
   <ul>
     {% for post in site.posts %}
       <li style="font-size: 24px">
-        <a class="text-muted" href="{{ post.url }}">{{ post.title }}</a>
+        <a class="text-muted" href="{{ post.url }}">{{ post.title }}</a> <span class="category {{post.category}}">{{ post.category | capitalize }}</span>
       </li>
     {% endfor %}
   </ul>

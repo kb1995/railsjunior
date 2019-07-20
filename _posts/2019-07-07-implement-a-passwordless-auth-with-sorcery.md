@@ -310,4 +310,4 @@ and finally views/users/edit.html.erb
 
 To make sure that the authentication works, go to incognito and enter the edit page URL. You shouldn't be able to access the page unless you are logged in with the correct account.
 
-[Source code for this article](https://github.com/kb1995/railsjunior-passwordless-auth)
+<a href="https://github.com/kb1995/railsjunior-passwordless-auth" target="_blank">Source code for this article.</a>
