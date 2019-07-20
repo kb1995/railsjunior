@@ -1,1 +1,1 @@
-[https://railsjunior.com/]
+https://railsjunior.com/
