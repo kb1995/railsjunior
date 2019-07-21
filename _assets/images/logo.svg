@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="193px" height="149px" viewBox="0 0 193 149" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Artboard" transform="translate(-134.000000, -135.000000)" fill="#D8D8D8" stroke="#FFFFFF" stroke-width="4">
+            <g id="Group" transform="translate(136.000000, 137.000000)">
+                <path d="M94.5,144.5 L0.5,44.5" id="Line"></path>
+                <path d="M30,1 L0.5,44.5" id="Line"></path>
+                <path d="M188.5,0.5 L159,44" id="Line" transform="translate(174.000000, 22.000000) scale(1, -1) translate(-174.000000, -22.000000) "></path>
+                <path d="M30.5,0 L158.5,1" id="Line" transform="translate(94.500000, 0.500000) scale(1, -1) translate(-94.500000, -0.500000) "></path>
+                <path d="M188.5,144.5 L94.5,44.5" id="Line" transform="translate(141.500000, 94.500000) scale(-1, 1) translate(-141.500000, -94.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>
