@@ -4,9 +4,9 @@ layout: default
 
 <div class="container">
   <h2>All Posts</h2>
-  <ul>
+  <ul class="article-list">
     {% for post in site.posts %}
-      <li style="font-size: 24px">
+      <li>
         <a class="text-muted" href="{{ post.url }}">{{ post.title }}</a> <span class="category {{post.category}}">{{ post.category | capitalize }}</span>
       </li>
     {% endfor %}
