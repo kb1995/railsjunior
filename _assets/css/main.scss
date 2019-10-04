@@ -7,6 +7,7 @@
 
 html, body{
   font-family: 'Gothic A1', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 
@@ -30,6 +31,7 @@ html, body{
   font-size: 16px;
   width: 25px;
   padding: 5px;
+  border-radius: 6px;
   
   &:hover{
     text-decoration: none;
@@ -56,13 +58,13 @@ html, body{
 
 // bg
 .bg-black{
-  background-color: #1f1919;
+  background-color: #000000;
 }
 
 .w-max-post{
-  max-width: 700px;
-  padding-right: 15px;
-  padding-left: 15px;
+  max-width: 850px;
+  padding-right: 25px;
+  padding-left: 25px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -92,17 +94,55 @@ b{
   font-weight: 700;
 }
 
+// 
+
+.blog-title{
+  font-size: 45px;
+  letter-spacing: -.45px;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
 .post-content{
   overflow: hidden;
+
+  mark{
+    background: #e5eff5;
+  }
+
   p,li{
-    font-size: 1.5rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-    color: rgb(43, 50, 53);
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: black
   }
 
   h2,h3{
-    font-weight: 700;
-    margin-bottom: 1.5rem;
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 60px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .blog-title{
+    font-size: 32px;
+    font-weight: 600px;
+  }
+
+  .post-content{
+    overflow: hidden;
+    p,li{
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  
+    h2,h3{
+      font-size: 26px;
+      font-weight: 600;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
   }
 }

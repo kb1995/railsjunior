@@ -1,7 +1,7 @@
 ---
 layout: blog
 slug: symbols-vs-string
-title: Theory&#58; Symbols vs Strings
+title: Symbols vs Strings
 date: 2019-07-27T6:00:00.000+00:00
 category: ruby
 
