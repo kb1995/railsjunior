@@ -42,5 +42,7 @@ You can now head over your receiving controller and continue coding.
 ## Further reading
 
 [https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent)
+
 [https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
+
 [https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)
