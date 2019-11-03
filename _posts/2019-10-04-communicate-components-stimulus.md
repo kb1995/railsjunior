@@ -1,7 +1,7 @@
 ---
 layout: blog
 slug: stimulusjs-create-custom-events
-title: Create custom events in order to communicate between StimulusJS controllers
+title: Communicating between Stimulus controllers using custom events
 date: 2019-10-04T6:00:00.000+00:00
 category: stimulusJS
 
