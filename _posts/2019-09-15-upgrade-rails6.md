@@ -2,6 +2,7 @@
 layout: blog
 slug: upgrade-to-rails-6
 title: How to upgrade from Rails 5.2 to Rails 6
+subtitle: Step by step process on how I upgraded my client's websites from Rails 5.2 to Rails 6
 date: 2019-10-01T7:00:00.000+00:00
 category: rails
 

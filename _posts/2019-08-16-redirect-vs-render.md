@@ -2,6 +2,7 @@
 layout: blog
 slug: redirect-vs-render
 title: Theory&#58; Redirect vs render
+subtitle: 
 date: 2020-08-08T6:00:00.000+00:00
 category: rails
 

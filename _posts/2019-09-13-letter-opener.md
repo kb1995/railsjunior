@@ -1,7 +1,8 @@
 ---
 layout: blog
 slug: letteropener-gem-not-working
-title: Why Letter opener gem doesn't open your letters - tldr; debug with .deliver!
+title: Why Letter opener gem doesn't open your letters
+subtitle: This is a simple way to find out why Letter opener is not opening your letters - use .deliver! so you can raise an exception
 date: 2019-09-13T6:00:00.000+00:00
 category: rails
 

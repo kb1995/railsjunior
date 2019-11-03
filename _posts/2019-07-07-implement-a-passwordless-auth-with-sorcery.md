@@ -2,6 +2,7 @@
 layout: blog
 slug: sorcery-passwordless-authentication
 title: Implement a passwordless authentication with Sorcery
+subtitle: Paswordless auth is great and provides a simple UX for your user - in this tutorial I implement in my Rails app using the auth gem Sorcery
 date: 2019-07-07T22:00:00.000+00:00
 category: rails
 

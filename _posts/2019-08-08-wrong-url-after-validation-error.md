@@ -2,6 +2,7 @@
 layout: blog
 slug: wrong-url-validation-error
 title: Why a Rails form validation error renders the wrong URL and how to fix it
+subtitle: Learn a bit more about render, redirect_to and resources to find out why the form validation error renders the wrong URL
 date: 2019-08-08T6:00:00.000+00:00
 category: rails
 
@@ -108,8 +109,6 @@ to
 ```erb
 <%= form_for @user, url: update_user_path(@user), method: :put do |f| %>
 ```
-
-TODO: Source code for this article
 
 ## Further reading
 

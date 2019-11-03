@@ -2,6 +2,7 @@
 layout: blog
 slug: safe-navigation-operator-in-ruby
 title: The safe navigation operator (&.) in Ruby 
+subtitle: Ruby's safe operator is used when you don't want your app to throw an exception if a method is called on a nil object.
 date: 2019-11-02T7:00:00.000+00:00
 category: ruby
 

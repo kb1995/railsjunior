@@ -2,6 +2,7 @@
 layout: blog
 slug: hour-input-inputmask
 title: How to create hours input with Input Mask and stimulusJS
+subtitle: if you are building an hour input, you can use input mask and stimulus to create a nice UI for your user.
 date: 2019-08-13T6:00:00.000+00:00
 category: stimulusJS
 

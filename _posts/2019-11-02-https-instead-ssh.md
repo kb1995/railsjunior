@@ -2,6 +2,7 @@
 layout: blog
 slug: use-https-instead-of-ssh
 title: Set up a https remote when ssh is not working
+subtitle: Create a https remote so you can pull and push code to Github when your internet connection is not secure and ssh doesn't work.
 date: 2019-11-02T7:00:00.000+00:00
 category: devops
 

@@ -2,6 +2,7 @@
 layout: blog
 slug: stimulusjs-create-custom-events
 title: Communicating between Stimulus controllers using custom events
+subtitle: One of the hardest things about Stimulus is communication between different Stimulus controllers. Custom events makes it easy and intuitive
 date: 2019-10-04T6:00:00.000+00:00
 category: stimulusJS
 

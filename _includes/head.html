@@ -13,7 +13,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="I'm Kris Bogdanov. A ruby on rails junior!">
+
+  {% if page.subtitle %}
+    <meta name="description" content="{{ page.subtitle }}">
+  {% else %}
+    <meta name="description" content="I'm a Ruby on Rails junior and I'm sharing tutorials on Ruby, Ruby on Rails, Javascript, CSS and DevOps!">
+  {% endif %}
 
   <!-- Twitter META tags -->
   <meta name="twitter:card" content="summary">
@@ -31,6 +36,8 @@
 
   {% if page.subtitle %}
     <meta name="twitter:description" content="{{ page.subtitle }}">
+  {% else %}
+    <meta name="description" content="I'm a Ruby on Rails junior and I'm sharing tutorials on Ruby, Ruby on Rails, Javascript, CSS and DevOps!">
   {% endif %}
 
 
@@ -48,6 +55,8 @@
 
   {% if page.subtitle %}
     <meta property="og:description" content="{{ page.subtitle }}" />
+  {% else %}
+    <meta name="description" content="I'm a Ruby on Rails junior and I'm sharing tutorials on Ruby, Ruby on Rails, Javascript, CSS and DevOps!">
   {% endif %}
   
 

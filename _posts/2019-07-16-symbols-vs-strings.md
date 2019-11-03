@@ -2,6 +2,7 @@
 layout: blog
 slug: symbols-vs-string
 title: Symbols vs Strings
+subtitle: Learn about Ruby's symbols and strings - what are the similarities and differences and which of the two is faster
 date: 2019-07-27T6:00:00.000+00:00
 category: ruby
 
