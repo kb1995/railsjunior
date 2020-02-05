@@ -140,7 +140,7 @@ This method creates both <mark>first_name</mark> and <mark>first_name=</mark> fo
 
 This is just an overview of the getter/setter concept and the attr_accessor method. I wrote a separate <a href="{% post_url 2020-01-30-getter-setter %}">article</a> where I go into more detail on this concept.
 
-# Defining class methods
+## Defining class methods
 
 Class methods provide the functionality to the class itself. We use the <mark>self</mark> keyword to define class methods.
 
@@ -160,7 +160,7 @@ p user.class_method
 
 You should remember that you cannot call instance methods on the class just like you can't call class methods on the instance.
 
-## Everything in Ruby is an Object
+## Everything in Ruby is an object
 
 Yes, really! Because everything is an object, everything was created from a class. You can see from which class the object is coming from using the <mark>.class</mark> method.
 
