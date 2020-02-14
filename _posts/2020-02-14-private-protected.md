@@ -1,7 +1,7 @@
 ---
 layout: blog
 slug: public-private
-title: The different between Ruby Public, Private & Protected methods
+title: The difference between Ruby Public, Private & Protected methods
 subtitle: Learn the basics of Ruby access control for methods. Ruby allows you to control the visibility of your methods using three options - public, private and protected.
 date: 2020-02-14T7:00:00.000+00:00
 category: ruby
