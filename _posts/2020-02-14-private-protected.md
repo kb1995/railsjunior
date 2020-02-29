@@ -84,7 +84,7 @@ p employee.weekend?
 
 In a lot of ways, protected methods are similar to private methods. You define protected methods using the same same as private methods. Just like private methods, protected methods can't be called outside the class but they can be called inside the class.
 
-The definition of protected methods is a bit more complicated compared to private methods. You can call protected methods with an explicit receiver (unline private), but that receiver should always be <mark>self</mark> or an object that inherits from <mark>self</mark>.
+The definition of protected methods is a bit more complicated compared to private methods. You can call protected methods with an explicit receiver (unlike private), but that receiver should always be <mark>self</mark> or an object that inherits from <mark>self</mark>.
 
 ```ruby
 require 'date'

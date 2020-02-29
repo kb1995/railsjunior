@@ -16,6 +16,6 @@ Add a <mark>!</mark> so your ignore comments look like this
 /*! purgecss end ignore */
 ```
 
-This removes any comments in and around rules, selectors & declarations. But if a comment marked with <mark>!</mark> are kept by default.
+This removes any comments in and around rules, selectors & declarations. But comments marked with <mark>!</mark> are kept by default.
 
 Enjoy purging!
